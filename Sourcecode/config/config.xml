@@ -1,0 +1,5 @@
+<auth>
+    <uri>neo4j+s://e9a115f6.databases.neo4j.io:7687</uri>
+    <user>neo4j</user>
+    <password>hE-Uv_anTiLxkuYjq6Tmz_Lq_BxT0XcwmmouzPdevjE</password>
+</auth>

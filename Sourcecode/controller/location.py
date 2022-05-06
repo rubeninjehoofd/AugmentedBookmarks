@@ -1,5 +1,7 @@
-# importing geopy library
+# Define imports
+# ----------------------------------
 from geopy.geocoders import Nominatim
+
 
 class Location():
 
