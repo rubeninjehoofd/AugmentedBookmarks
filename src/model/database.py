@@ -5,16 +5,17 @@ import logging
 from neo4j.exceptions import ServiceUnavailable
 from bs4 import BeautifulSoup
 
+
 class App:
 
     def __init__(self):
-        
+
         # Define auth variables
         # ----------------------------------------------------------------------
         with open("config/config.xml", "r") as f:
             config = f.read()
             file = BeautifulSoup(config, features="html.parser")
-            
+
             uri = file.auth.uri.string
             user = file.auth.user.string
             password = file.auth.password.string
@@ -25,11 +26,11 @@ class App:
     def close(self):
         self.driver.close()
 
-    # Actions with the database 
-    # ----------------------------------------------------------------------    
+    # Actions with the database
+    # ----------------------------------------------------------------------
 
     # Create person function
-    # ----------------------------------------------------------------------    
+    # ----------------------------------------------------------------------
     def create_person(self, name):
         with self.driver.session() as session:
             # Write transactions allow the driver to handle retries and transient errors
@@ -39,7 +40,7 @@ class App:
                 print("Created person")
                 for row in result:
                     print("Created person")
-            else: 
+            else:
                 print("Person {p} already exists".format(p=name))
 
     @staticmethod
@@ -57,10 +58,10 @@ class App:
                 query=query, exception=exception))
             raise
 
-    # ----------------------------------------------------------------------   
+    # ----------------------------------------------------------------------
 
     # Crate bookmark
-    # ----------------------------------------------------------------------    
+    # ----------------------------------------------------------------------
 
     def create_bookmark(self, name):
         with self.driver.session() as session:
@@ -70,10 +71,9 @@ class App:
                 result = session.write_transaction(self._create_bookmark, name)
                 for row in result:
                     print("Created person: {p}".format(p=name))
-            else: 
+            else:
                 print("Person {p} already exists".format(p=name))
 
-    
     @staticmethod
     def _create_bookmark(tx, name):
         query = (
@@ -89,17 +89,16 @@ class App:
                 query=query, exception=exception))
             raise
 
-
-
-    # ----------------------------------------------------------------------    
+    # ----------------------------------------------------------------------
 
     def find_person(self, person_name):
         with self.driver.session() as session:
-            result = session.read_transaction(self._find_and_return_person, person_name)
+            result = session.read_transaction(
+                self._find_and_return_person, person_name)
             if len(result) == 0:
                 print("No person found")
                 return False
-            else: 
+            else:
                 for row in result:
                     print("Found person: {row}".format(row=row))
                 return True
