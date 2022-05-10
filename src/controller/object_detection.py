@@ -1,7 +1,7 @@
 import cv2
 
 # set const variables
-path = '../config/bavo_leidsevaart_cascade.xml'  # PATH OF THE CASCADE
+path = '../config/haarcascade_bavo_leidsevaart.xml'  # PATH OF THE CASCADE
 camera_no = 0                    # CAMERA NUMBER
 obj_name = 'Sint Bavo Kerk - leidsevaart'       # OBJECT NAME TO DISPLAY
 frame_width = 640                     # DISPLAY WIDTH
@@ -26,6 +26,7 @@ cv2.createTrackbar("Brightness","Result",180,255,empty)
 
 # LOAD THE CLASSIFIERS DOWNLOADED
 cascade = cv2.CascadeClassifier(cv2.data.haarcascades + path)
+assert not cascade.empty()
 
 while True:
     # Set camera brightness from trackbar value
