@@ -1,7 +1,7 @@
 import cv2
 
 # set const variables
-path = '../config/haarcascade_bavo_leidsevaart.xml'  # PATH OF THE CASCADE
+path = "config\haarcascade_bavo_leidsevaart.xml"  # PATH OF THE CASCADE
 camera_no = 0                    # CAMERA NUMBER
 obj_name = 'Sint Bavo Kerk - leidsevaart'       # OBJECT NAME TO DISPLAY
 frame_width = 640                     # DISPLAY WIDTH
@@ -25,7 +25,7 @@ cv2.createTrackbar("Min Area","Result",0,100000,empty)
 cv2.createTrackbar("Brightness","Result",180,255,empty)
 
 # LOAD THE CLASSIFIERS DOWNLOADED
-cascade = cv2.CascadeClassifier(cv2.data.haarcascades + path)
+cascade = cv2.CascadeClassifier("haarcascades/haarcascade_bavo_leidsevaart.xml")
 assert not cascade.empty()
 
 while True:
