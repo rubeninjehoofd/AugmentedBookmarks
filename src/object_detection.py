@@ -1,11 +1,25 @@
+from posixpath import abspath
 import cv2
 
 # set const variables
-path = "config\haarcascade_bavo_leidsevaart.xml"  # PATH OF THE CASCADE
-camera_no = 0                    # CAMERA NUMBER
-obj_name = 'Sint Bavo Kerk - leidsevaart'       # OBJECT NAME TO DISPLAY
-frame_width = 640                     # DISPLAY WIDTH
-frame_height = 480                  # DISPLAY HEIGHT
+# Relative path to xml
+rel_path = "haarcascades\haarcascade_s10.xml"
+
+# Absolute path to xml
+abs_path = "C:\src\AugmentedBookmarks\src\haarcascades\haarcascade_s10.xml" 
+
+# Camera
+camera_no = 0                    
+
+# Name to display
+obj_name = 'Sint Bavo Kerk - leidsevaart'
+
+# Display width 
+frame_width = 640
+
+# Display height
+frame_height = 480
+
 color = (255,0,255)
 
 
@@ -16,7 +30,7 @@ cap.set(4, frame_height)
 def empty(a):
     pass
 
-# CREATE TRACKBAR
+# Create trackbar
 cv2.namedWindow("Result")
 cv2.resizeWindow("Result",frame_width,frame_height+100)
 cv2.createTrackbar("Scale","Result",400,1000,empty)
@@ -24,8 +38,11 @@ cv2.createTrackbar("Neig","Result",8,50,empty)
 cv2.createTrackbar("Min Area","Result",0,100000,empty)
 cv2.createTrackbar("Brightness","Result",180,255,empty)
 
-# LOAD THE CLASSIFIERS DOWNLOADED
-cascade = cv2.CascadeClassifier("haarcascades/haarcascade_bavo_leidsevaart.xml")
+# Load the classifier
+cascade = cv2.CascadeClassifier(rel_path)
+if cascade.empty():
+    cascade = cv2.CascadeClassifier(abs_path)
+
 assert not cascade.empty()
 
 while True:
