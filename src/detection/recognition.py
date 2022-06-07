@@ -6,7 +6,7 @@ import os
 import tensorflow as tf
 
 model = models.load_model("src/detection/pre-trained-model-29mei.h5")
-video = cv2.VideoCapture(0)
+video = cv2.VideoCapture(1)
 
 while True:
         _, frame = video.read()
